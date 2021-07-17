@@ -1,0 +1,40 @@
+{
+    "preloadMapAsset": true,
+    "preloadSceneObjectAsset": true,
+    "preloadSceneCommandAsset": true,
+    "dataLayers": [],
+    "sceneObjects": [],
+    "customCommandPages": [],
+    "preLoadAssets": [],
+    "serverInstanceClassName": "ServerScene",
+    "clientInstanceClassName": "ClientScene",
+    "id": 2,
+    "name": "我的场景2",
+    "width": 1216,
+    "height": 704,
+    "LayerDatas": [
+        {
+            "dx": 0,
+            "dy": 0,
+            "scaleX": 1,
+            "scaleY": 1,
+            "skewX": 0,
+            "skewY": 0,
+            "xMove": -1.3,
+            "yMove": 0,
+            "prospectsPerX": 1,
+            "prospectsPerY": 1,
+            "xLoop": true,
+            "yLoop": true,
+            "opacity": 0.52,
+            "blendMode": null,
+            "drawMode": false,
+            "tileData": [],
+            "autoTileDataCache": [],
+            "img": "asset/image/picture/control/btn_click.png"
+        },
+        {
+            "p": true
+        }
+    ]
+}

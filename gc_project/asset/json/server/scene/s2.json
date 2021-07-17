@@ -1,0 +1,32 @@
+{
+    "sceneObjects": [],
+    "customCommands": [
+        [
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>以上演示的功能仅供参考，具体模板有哪些功能或者不需要哪些功能由模板制作者自行决定。</span>",
+                null,
+                1
+            ],
+            [
+                20,
+                "回到标题界面",
+                "window.location.reload();",
+                "window.location.reload();\n"
+            ]
+        ],
+        [],
+        []
+    ],
+    "customAttributes": [],
+    "customAttributesCaches": [],
+    "events": [],
+    "statusPages": [],
+    "statusPagesSelectedIndexs": [],
+    "id": 2
+}

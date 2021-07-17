@@ -1,0 +1,405 @@
+{
+    "sceneObjects": [
+        null,
+        {
+            "modelID": 1,
+            "index": 1,
+            "name": "路人",
+            "x": 592,
+            "y": 368,
+            "z": 0,
+            "materialData": [
+                {
+                    "materials": []
+                }
+            ],
+            "avatarID": 1,
+            "avatarOri": 6,
+            "avatarAct": 1,
+            "avatarFPS": 12,
+            "avatarFrame": 0,
+            "avatarAlpha": 1,
+            "avatarHue": 0,
+            "shadowEnable": false,
+            "shadowWidth": 30,
+            "shadowHeight": 15,
+            "shadowAlpha": 0.5,
+            "displayList": {
+                "avatar": {
+                    "type": 1,
+                    "id": 0
+                }
+            },
+            "layerLevel": 1,
+            "autoPlayEnable": true,
+            "scale": 1,
+            "playerUID": 0,
+            "hasCommand": []
+        },
+        null
+    ],
+    "customCommands": [
+        [
+            [
+                0,
+                4,
+                4,
+                [
+                    0,
+                    1,
+                    1,
+                    0
+                ],
+                2,
+                0,
+                [
+                    5,
+                    1,
+                    1,
+                    0
+                ],
+                0,
+                [
+                    1,
+                    1,
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                0,
+                0,
+                [
+                    1,
+                    1
+                ],
+                "",
+                "",
+                false,
+                null,
+                [
+                    4,
+                    {
+                        "soType": 0,
+                        "soIndex": 0,
+                        "soName": ""
+                    },
+                    [
+                        {
+                            "42101689101_0.6879949317343748": 0,
+                            "42101720516_0.026869997028315717": 0,
+                            "42101779038_0.15678413160599147": ""
+                        }
+                    ]
+                ],
+                {
+                    "___cmdID": "63076322201_0.7363051165309051"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>叮咚，恭喜你发现了新大陆。</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.0572450533410056"
+                }
+            ],
+            [
+                2,
+                {
+                    "___cmdID": "63076322201_0.6781593706734994"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>您好，这个是未实现任何游戏玩法和操作的</span><span style='color:#00ff00'>2D单机版内核</span><span style='color:#FfFffF'>。\n</span><span style='color:#FfFffF'>是让高级开发人员制作游戏编辑器/游戏模板用的基础内核。\n</span><span style='color:#FfFffF'>新人请推荐使用已制作好的游戏模板来开发游戏自己的游戏哦~</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.9036026319637898"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>该内核提供了少量的范例，包括但不限于：\n</span><span style='color:#FfFffF'>--自定义事件触发方式\n</span><span style='color:#FfFffF'>--自定义事件命令\n</span><span style='color:#FfFffF'>--自定义行为\n</span><span style='color:#FfFffF'>--自定义模块\n</span><span style='color:#FfFffF'>--程序脚本</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.020883597233246842"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>现在执行的事件就是一种自定义的触发事件，\n</span><span style='color:#FfFffF'>名为「进入场景」的事件，玩家在进入当前场景时触发。\n</span><span style='color:#00ff3c'>可视化修改类别：菜单-自定义编辑器-触发事件类别-场景\n</span><span style='color:#fff700'>代码实现：脚本编辑器（快捷键F11）-GameStart.ts（可用CTRL+R查找文件名）\n</span><span style='color:#ffffff'>也就是说开发者可以自己决定在什么情况下触发什么事件页，以及触发者是谁，执行者是谁。</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.3997502943317961"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>该内核制作了一个自定义模块示例：</span><span style='color:#2fff00'>「照片」</span><span style='color:#ffffff'>（F10打开数据库查看模块）\n</span><span style='color:#ffffff'>在玩家的自定义属性中制作了</span><span style='color:#ffd781'>“相册”</span><span style='color:#ffffff'>的属性，以便装载照片。\n</span><span style='color:#ffffff'>然后制作了界面用于显示玩家的相册，接下来演示一下：</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.4096925314206892"
+                }
+            ],
+            [
+                20,
+                "显示2号界面",
+                "// 当前的事件触发器：trigger: CommandTrigger;\n// 系统层不自带显示界面的指令而是通常模板会制作可供预览的相关自定义事件，\nGameUI.show(2);",
+                "GameUI.show(2);\n",
+                {
+                    "___cmdID": "63076639876_0.1791210933537064"
+                }
+            ],
+            [
+                17,
+                60,
+                0,
+                false,
+                {
+                    "___cmdID": "63076322201_0.2552027148371552"
+                }
+            ],
+            [
+                10001,
+                {
+                    "42010122135_0.24848401267879283": 1,
+                    "42010122302_0.8639031550866347": 1
+                },
+                "63076322201_0.22970873276444737"
+            ],
+            [
+                17,
+                30,
+                0,
+                false,
+                {
+                    "___cmdID": "63076322201_0.7081744441821931"
+                }
+            ],
+            [
+                10001,
+                {
+                    "42010122135_0.24848401267879283": 1,
+                    "42010122302_0.8639031550866347": 1
+                },
+                "63076322201_0.9365818948850353"
+            ],
+            [
+                17,
+                30,
+                0,
+                false,
+                {
+                    "___cmdID": "63076322201_0.6968914162979156"
+                }
+            ],
+            [
+                10001,
+                {
+                    "42010122135_0.24848401267879283": 1,
+                    "42010122302_0.8639031550866347": 1
+                },
+                "63076322201_0.8965981864093251"
+            ],
+            [
+                17,
+                30,
+                0,
+                false,
+                {
+                    "___cmdID": "63076322201_0.12343684233503871"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>好了，我们关闭掉他。</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.838982722185539"
+                }
+            ],
+            [
+                17,
+                30,
+                0,
+                false,
+                {
+                    "___cmdID": "63076322201_0.09535429683339158"
+                }
+            ],
+            [
+                20,
+                "隐藏2号界面",
+                "// 当前的事件触发器：trigger: CommandTrigger;\n// 系统层不自带显示界面的指令而是通常模板会制作可供预览的相关自定义事件，\nGameUI.hide(2);",
+                "GameUI.hide(2);\n",
+                {
+                    "___cmdID": "63076841017_0.8189089124057545"
+                }
+            ],
+            [
+                17,
+                30,
+                0,
+                false,
+                {
+                    "___cmdID": "63076322201_0.9660983980408508"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>自定义模块和自定义玩家属性都可以在</span><span style='color:#00ff04'>菜单-自定义编辑器中进行可视化编辑</span><span style='color:#FfFffF'>，\n</span><span style='color:#FfFffF'>并在脚本中预先实现其功能，以便该功能可以通过可视化来使用。</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.8671455726536217"
+                }
+            ],
+            [
+                22,
+                1,
+                1,
+                [
+                    [
+                        1,
+                        5,
+                        2
+                    ],
+                    [
+                        2,
+                        30
+                    ],
+                    [
+                        1,
+                        1,
+                        0.5
+                    ],
+                    [
+                        2,
+                        30
+                    ]
+                ],
+                0,
+                0,
+                {
+                    "___cmdID": "63076322201_0.4116419869500514"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>现在你看到的是</span><span style='color:#00ff04'>自定义行为</span><span style='color:#FfFffF'>的示例，可以根据游戏类型、玩法等来设计模板预先提供给\n</span><span style='color:#FfFffF'>作者使用的可视化对象行为指令。</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.8430109536507409"
+                }
+            ],
+            [
+                11,
+                1,
+                "asset/image/picture/face/男主头像.png",
+                "系统",
+                4,
+                -3,
+                "<span style='color:#FfFffF'>好了，然后我们会进入到下一个场景。</span>",
+                null,
+                1,
+                {
+                    "___cmdID": "63076322201_0.3847220508079623"
+                }
+            ],
+            [
+                21,
+                false,
+                2,
+                612,
+                353,
+                {
+                    "___cmdID": "63076322201_0.21716529231852566"
+                }
+            ]
+        ],
+        [],
+        []
+    ],
+    "customAttributes": [
+        null,
+        {},
+        null
+    ],
+    "customAttributesCaches": [],
+    "events": [
+        null,
+        {
+            "condition": [],
+            "customCommands": [
+                [],
+                [],
+                []
+            ]
+        },
+        null
+    ],
+    "statusPages": [
+        null,
+        [],
+        null
+    ],
+    "statusPagesSelectedIndexs": [],
+    "behaviors": [
+        null,
+        [
+            -1,
+            0,
+            []
+        ],
+        null
+    ],
+    "id": 1
+}

@@ -1,0 +1,15 @@
+{
+    "attrs": {
+        "自定义模块范例": {
+            "varType": 1,
+            "value": "",
+            "copy": false
+        },
+        "picture": {
+            "varType": 1,
+            "value": "asset/image/picture/face/男主头像.png",
+            "copy": false
+        }
+    },
+    "id": 1
+}

@@ -1,0 +1,117 @@
+{
+    "worldAttributeSetting": {
+        "blockList": [
+            {
+                "name": "范例-自定义世界属性",
+                "blockAttrs": [
+                    {
+                        "attr": {
+                            "id": "42012254950_0.12783834033791752",
+                            "varName": "screenMode",
+                            "varType": 0,
+                            "compData": {
+                                "compType": 2,
+                                "compParam": {
+                                    "items": "自动横屏,自动竖屏",
+                                    "showIndex": true
+                                }
+                            },
+                            "defaultValue": "",
+                            "hideMode": false,
+                            "useCommand": false,
+                            "onlyPointTo": false,
+                            "moduleID": 1,
+                            "dataStructureID": 1,
+                            "arrayMode": false,
+                            "arrayLength": 100,
+                            "arrayAllowDelete": false,
+                            "arrayAllowSwap": false,
+                            "arrayAllowUpdate": false,
+                            "accessMode": 1,
+                            "syncMode": 0,
+                            "attrTips": "",
+                            "alias": "移动端屏幕布局模式",
+                            "onlyConfig": false,
+                            "preview": false,
+                            "autoTitleWidth": true,
+                            "titleWidth": 100
+                        },
+                        "attrConditions": [],
+                        "y": 32,
+                        "x": 20,
+                        "width": 313,
+                        "height": 32
+                    }
+                ],
+                "blockCondition": [],
+                "blockHeight": 94,
+                "autoOrder": true
+            }
+        ]
+    },
+    "playerAttributeSetting": {
+        "blockList": [
+            {
+                "name": "范例-自定义玩家属性",
+                "blockAttrs": [
+                    {
+                        "attr": {
+                            "id": "42007684431_0.6822505733666104",
+                            "varName": "photos",
+                            "varType": 4,
+                            "compData": {
+                                "compType": 1004,
+                                "compParam": {}
+                            },
+                            "defaultValue": "",
+                            "hideMode": false,
+                            "useCommand": false,
+                            "onlyPointTo": true,
+                            "moduleID": 1,
+                            "dataStructureID": 1,
+                            "arrayMode": true,
+                            "arrayLength": 100,
+                            "arrayAllowDelete": false,
+                            "arrayAllowSwap": false,
+                            "arrayAllowUpdate": false,
+                            "accessMode": 1,
+                            "syncMode": 0,
+                            "attrTips": "自定义属性范例之二：脚本中可使用Game.player.data.photos调用",
+                            "alias": "相册",
+                            "onlyConfig": false,
+                            "preview": false,
+                            "autoTitleWidth": true,
+                            "titleWidth": 100
+                        },
+                        "attrConditions": [],
+                        "y": 19,
+                        "x": 15,
+                        "width": 377,
+                        "height": 194
+                    }
+                ],
+                "blockCondition": [],
+                "blockHeight": 234,
+                "autoOrder": true
+            }
+        ]
+    },
+    "worldAttributeConfig": {
+        "attrs": {
+            "screenMode": {
+                "varType": 0,
+                "value": 0,
+                "copy": false
+            }
+        }
+    },
+    "playerAttributeConfig": {
+        "attrs": {
+            "photos": {
+                "varType": 6,
+                "value": [],
+                "copy": false
+            }
+        }
+    }
+}

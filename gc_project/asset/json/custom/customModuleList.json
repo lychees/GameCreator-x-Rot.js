@@ -1,0 +1,57 @@
+{
+    "list": [
+        null,
+        "照片"
+    ],
+    "data": {
+        "1": {
+            "id": 1,
+            "blockList": [
+                {
+                    "name": "自定义模块范例",
+                    "blockAttrs": [
+                        {
+                            "attr": {
+                                "id": "42007466564_0.12175971274735975",
+                                "varName": "picture",
+                                "varType": 1,
+                                "compData": {
+                                    "compType": 22,
+                                    "compParam": {}
+                                },
+                                "defaultValue": "",
+                                "hideMode": false,
+                                "useCommand": false,
+                                "onlyPointTo": false,
+                                "moduleID": 1,
+                                "dataStructureID": 1,
+                                "arrayMode": false,
+                                "arrayLength": 100,
+                                "arrayAllowDelete": false,
+                                "arrayAllowSwap": false,
+                                "arrayAllowUpdate": false,
+                                "accessMode": 1,
+                                "syncMode": 0,
+                                "attrTips": "",
+                                "alias": "照片",
+                                "onlyConfig": false,
+                                "preview": false,
+                                "autoTitleWidth": true,
+                                "titleWidth": 100
+                            },
+                            "attrConditions": [],
+                            "y": 15,
+                            "x": 15,
+                            "width": 200,
+                            "height": 230
+                        }
+                    ],
+                    "blockCondition": [],
+                    "blockHeight": 263,
+                    "autoOrder": true,
+                    "hideBlockTitle": false
+                }
+            ]
+        }
+    }
+}

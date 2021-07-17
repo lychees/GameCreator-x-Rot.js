@@ -1,0 +1,236 @@
+{
+    "root": {
+        "children": [
+            {
+                "id": "42089625440_0.6600192083352645",
+                "condition": [],
+                "type": "UIBitmap",
+                "name": "黑色背景",
+                "x": 0,
+                "y": 0,
+                "width": 1200,
+                "height": 700,
+                "opacity": 0.5,
+                "rotation": 0,
+                "show": true,
+                "mouseEventEnabledData": true,
+                "materialData": [
+                    {
+                        "materials": []
+                    }
+                ],
+                "mouseEventEnabledInEditor": true,
+                "showOnEditor": true,
+                "hasCommand": [],
+                "isOpen": true,
+                "image": "asset/image/picture/control/uicomboboxbg.png",
+                "grid9": "2,2,2,2,0",
+                "pivotType": 0
+            },
+            {
+                "id": "42009204911_0.21375574199336578",
+                "condition": [],
+                "type": "UIBitmap",
+                "name": "图片",
+                "x": 250,
+                "y": 63,
+                "width": 707,
+                "height": 505,
+                "opacity": 1,
+                "rotation": 0,
+                "show": true,
+                "mouseEventEnabledData": true,
+                "materialData": [
+                    {
+                        "materials": []
+                    }
+                ],
+                "mouseEventEnabledInEditor": true,
+                "showOnEditor": true,
+                "hasCommand": [],
+                "isOpen": true,
+                "image": "asset/image/picture/control/uibitmap.png",
+                "grid9": "3,3,3,3,0",
+                "pivotType": 0,
+                "children": [
+                    {
+                        "id": "42008246593_0.6346870888739817",
+                        "condition": [],
+                        "type": "UIList",
+                        "name": "photoList",
+                        "x": 5,
+                        "y": 5,
+                        "width": 702,
+                        "height": 481,
+                        "opacity": 1,
+                        "rotation": 0,
+                        "show": true,
+                        "mouseEventEnabledData": true,
+                        "materialData": [
+                            {
+                                "materials": []
+                            }
+                        ],
+                        "mouseEventEnabledInEditor": true,
+                        "showOnEditor": true,
+                        "hasCommand": [],
+                        "isOpen": true,
+                        "itemModelGUI": 3,
+                        "previewSize": 10,
+                        "selectEnable": true,
+                        "repeatX": 3,
+                        "itemWidth": 225,
+                        "itemHeight": 225,
+                        "spaceX": 2,
+                        "spaceY": 20,
+                        "scrollShowType": 2,
+                        "hScrollBar": "asset/image/picture/control/hscroll_bar.png",
+                        "hScrollBg": "asset/image/picture/control/hscroll_bg.png",
+                        "vScrollBar": "asset/image/picture/control/vscroll_bar.png",
+                        "vScrollBg": "asset/image/picture/control/vscroll_bg.png",
+                        "scrollWidth": 16,
+                        "selectImageURL": "asset/image/picture/control/uilistselect.png",
+                        "selectImageGrid9": "0,0,0,0,0",
+                        "selectedImageAlpha": 0.5,
+                        "selectedImageOnTop": false,
+                        "overImageURL": "asset/image/picture/control/uibitmap.png",
+                        "overImageGrid9": "0,0,0,0,0",
+                        "overImageAlpha": 0.12,
+                        "overImageOnTop": true,
+                        "overSelectMode": false,
+                        "slowmotionType": 0
+                    }
+                ]
+            },
+            {
+                "id": "42008308822_0.042419174767440504",
+                "condition": [],
+                "type": "UIButton",
+                "name": "按钮",
+                "x": 515,
+                "y": 600,
+                "width": 216,
+                "height": 54,
+                "opacity": 1,
+                "rotation": 0,
+                "show": true,
+                "mouseEventEnabledData": true,
+                "materialData": [
+                    {
+                        "materials": []
+                    }
+                ],
+                "mouseEventEnabledInEditor": true,
+                "showOnEditor": true,
+                "hasCommand": [
+                    true
+                ],
+                "isOpen": true,
+                "label": "点击测试",
+                "image1": "asset/image/picture/control/btn_normal.png",
+                "grid9img1": "0,0,0,0,0",
+                "image2": "asset/image/picture/control/btn_over.png",
+                "grid9img2": "0,0,0,0,0",
+                "image3": "asset/image/picture/control/btn_click.png",
+                "grid9img3": "0,0,0,0,0",
+                "fontSize": 16,
+                "color": "#999999",
+                "overColor": "#999999",
+                "clickColor": "#999999",
+                "bold": false,
+                "italic": false,
+                "align": 1,
+                "valign": 1,
+                "letterSpacing": 0,
+                "font": "宋体",
+                "textDx": 0,
+                "textDy": 0,
+                "textStroke": 0,
+                "textStrokeColor": "#000000"
+            },
+            {
+                "id": "42016025330_0.852487523938914",
+                "condition": [],
+                "type": "UIString",
+                "name": "文本",
+                "x": 250,
+                "y": 578,
+                "width": 145,
+                "height": 30,
+                "opacity": 1,
+                "rotation": 0,
+                "show": true,
+                "mouseEventEnabledData": false,
+                "materialData": [
+                    {
+                        "materials": []
+                    }
+                ],
+                "mouseEventEnabledInEditor": true,
+                "showOnEditor": true,
+                "hasCommand": [],
+                "isOpen": true,
+                "text": "照片总数",
+                "fontSize": 18,
+                "color": "#ffffff",
+                "bold": true,
+                "italic": false,
+                "align": 0,
+                "valign": 0,
+                "leading": 0,
+                "letterSpacing": 0,
+                "font": "宋体",
+                "wordWrap": true,
+                "overflow": 0,
+                "shadowColor": "#000000",
+                "shadowDx": 1,
+                "shadowDy": 1,
+                "stroke": 0,
+                "strokeColor": "#000000"
+            },
+            {
+                "id": "42016055850_0.7202032710997268",
+                "condition": [],
+                "type": "UIString",
+                "name": "文本",
+                "x": 250,
+                "y": 614,
+                "width": 159,
+                "height": 30,
+                "opacity": 1,
+                "rotation": 0,
+                "show": true,
+                "mouseEventEnabledData": false,
+                "materialData": [
+                    {
+                        "materials": []
+                    }
+                ],
+                "mouseEventEnabledInEditor": true,
+                "showOnEditor": true,
+                "hasCommand": [],
+                "isOpen": true,
+                "text": "路人甲的照片数",
+                "fontSize": 18,
+                "color": "#ffffff",
+                "bold": true,
+                "italic": false,
+                "align": 0,
+                "valign": 0,
+                "leading": 0,
+                "letterSpacing": 0,
+                "font": "宋体",
+                "wordWrap": true,
+                "overflow": 0,
+                "shadowColor": "#000000",
+                "shadowDx": 1,
+                "shadowDy": 1,
+                "stroke": 0,
+                "strokeColor": "#000000"
+            }
+        ]
+    },
+    "id": 2,
+    "instanceClassName": "GUI_Photos",
+    "hasRootCommand": []
+}

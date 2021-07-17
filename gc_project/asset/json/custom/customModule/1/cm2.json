@@ -1,0 +1,15 @@
+{
+    "attrs": {
+        "picture": {
+            "varType": 1,
+            "value": "asset/image/picture/control/check_unselected.png",
+            "copy": false
+        },
+        "自定义模块范例": {
+            "varType": 1,
+            "value": "",
+            "copy": false
+        }
+    },
+    "id": 2
+}

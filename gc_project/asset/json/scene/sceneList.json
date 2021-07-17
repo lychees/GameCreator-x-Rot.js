@@ -1,0 +1,45 @@
+{
+    "list": [
+        null,
+        "我的场景1",
+        "我的场景2",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    ],
+    "node": [
+        {
+            "id": 1,
+            "name": "我的场景1",
+            "children": []
+        },
+        {
+            "id": 2,
+            "name": "我的场景2",
+            "children": []
+        }
+    ]
+}
