@@ -6,9 +6,11 @@ class Map {
     name: string;
 
     layer: any[][][];
-    shadow: boolean[][];
+    shadow: number[][];
     agents: any[];
     player: any;
+
+    isFov: boolean;
 
     constructor(w: number, h: number) {        
         this.width = w;
@@ -20,6 +22,7 @@ class Map {
             this.shadow[x] = new Array<any>(h);
             for (let y=0;y<h;++y) {         
                 this.layer[x][y] = new Array<any>();
+                this.shadow[x][y] = 1;
             }
         }
         this.agents = new Array<any>();
@@ -53,14 +56,23 @@ class Map {
         }
         return true;        
     }
+    // 光线检测
+    canLightPass(x: number, y:number): boolean {
+        if (!this.inMap(x, y)) return false;            
+        for (let t of this.layer[x][y]) {     
+            if (!t.lightpass) return false; 
+        }
+        return true;  
+    }
+
     // 画某个位置的地块
     draw_tile_at(x: number, y:number) {
         Main.display.draw(x, y, null);
         let a = this.layer[x][y];
         if (a !== null) {            
             let n = a.length;
-            if (this.shadow[x][y] == true) {
-                a[n-1].draw_with_shadow(0.5);
+            if (this.shadow[x][y] !== 0 && this.isFov) {
+                a[n-1].draw_with_shadow(this.shadow[x][y]);
             } else {
                 a[n-1].draw();
             }
@@ -114,25 +126,32 @@ class Map {
         // 生成玩家
         let player = this.createTileFromSpaces(Player, spaces);  
         this.agents.push(player);
-        this.player = player;
+        this.player = player;            
         Main.player = player;
+        player.set_shadow(0.5, 360);
+        player.set_shadow();
 
         // 生成出口
         let exit = this.createTileFromSpaces(Exit, spaces);
         this.layer[exit.x][exit.y].push(exit);        
         // 生成箱子与钥匙        
-        if (level >= 1) {
+
+        let ui1 = GameUI.get(1);        
+        this.isFov = !ui1.isFov.selected;
+        let isBox = ui1.isBox.selected;
+        let isGuard = ui1.isGuard.selected;
+        
+        if (isBox) {
             for (var i=0;i<3;i++) {
                 let box = this.createTileFromSpaces(Box, spaces);                
                 box.hasKey = !i;
                 this.layer[box.x][box.y].push(box);
             }
             exit.needKey = true;
-            // 生成卫兵
-            if (level >= 2) {
-                let guard = this.createTileFromSpaces(Guard, spaces);  
-                this.agents.push(guard);
-            }
+        }                    
+        if (isGuard) {
+            let guard = this.createTileFromSpaces(Guard, spaces);  
+            this.agents.push(guard);
         }
     }
 }
@@ -140,12 +159,64 @@ class Map {
 
 // 地块
 
+/**
+     * 转化为RGB 为 HEX
+     * @param {string} data 如：rgb(0,0,0)
+     */
+function colorHex(colorArr) {
+    let strHex = "#" 
+    let colorArr
+    // 转成16进制 
+    for (let i = 0; i < colorArr.length; i++) {
+        let hex = Number(colorArr[i]).toString(16);
+        if (hex.length == "1") { hex = "0" + hex; }
+        strHex += hex;
+    }
+    return strHex;
+}
+
+/**
+ * 转化为HEX 为RGB
+ * @param {string} data 如：#ffffff、#fff
+ */
+function colorRgb(data) {
+    // 16进制颜色值的正则 
+    let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    // 把颜色值变成小写 
+    let color = data.toLowerCase();
+    if (reg.test(color)) {
+        // 如果只有三位的值，需变成六位，如：#fff => #ffffff 
+        if (color.length === 4) {
+            let colorNew = "#";
+            for (let i = 1; i < 4; i += 1) {
+                colorNew += color.slice(i, i + 1).concat(color.slice(i, i + 1));
+            }
+            color = colorNew;
+        }
+        // 处理六位的颜色值，转为RGB 
+        let colorChange = [];
+        for (let i = 1; i < 7; i += 2) {
+            colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
+        }
+        return colorChange;
+    } else { return color; }
+}
+
+function mix(data: string, shadow: number) {
+    let c = colorRgb(data);
+    for (let i=0;i<c.length;++i) {
+        c[i] = Math.floor(c[i] * (1 - shadow));
+    }
+    return colorHex(c);
+}
+
 class Tile {
     x: number;
     y: number;
     ch: string;
     color: string;
     passable: boolean;
+    lightpass: boolean;
 
     constructor(_x:number=0, _y:number=0, _ch:string="  ", _color="#fff") {
         this.x = _x;
@@ -153,6 +224,7 @@ class Tile {
         this.ch = _ch;
         this.color = _color;  
         this.passable = true;
+        this.lightpass = true;
     }
     enter() {
     }
@@ -161,12 +233,16 @@ class Tile {
     draw() {
         Main.display.draw(this.x, this.y, this.ch, this.color);
     }
+    draw_with_shadow(shadow: number) {
+        Main.display.draw(this.x, this.y, this.ch, mix(this.color, shadow));
+    }
 }
 
 class Wall extends Tile {
     constructor(_x:number=0, _y:number=0, _ch:string="墻", _color="#fff") {
         super(_x,_y,_ch,_color);
         this.passable = false;
+        this.lightpass = false;
     }
 }
 
@@ -209,15 +285,55 @@ class Box extends Tile {
     }
 }
 
-class Player extends Exit {    
+class Creature extends Tile {
+    d: number; // direction  
+    fv: number; // field_of_vision
 
-    constructor(_x:number=0, _y:number=0, _ch:string="我", _color="#ff0") {
+    hp: number; HP: number;
+    mp: number; MP: number;
+    sp: number; SP: number;
+
+    str: number; dex: number; con: number;
+    int: number; wis: number; cha: number;
+
+    constructor(_x:number=0, _y:number=0, _ch:string="c", _color="#fff") {
         super(_x,_y,_ch,_color);
+        this.d = 0; this.fv = 6; 
+        
+        this.hp = 0; this.HP = 0;
+        this.mp = 0; this.MP = 0;
+        this.sp = 0; this.SP = 0;
+
+        this.str = 0; this.dex = 0; this.con = 0;
+        this.int = 0; this.wis = 0; this.cha = 0;
     }
 
     getSpeed() {
         return 100;
     }
+   
+    set_shadow(s:number=0, angle:number=90) {
+        var fov = new ROT.FOV.RecursiveShadowcasting(function(x, y) {
+            return Main.map.canLightPass(x, y); 
+        });
+        if (angle == 90) {
+            fov.compute90(this.x, this.y, this.fv, this.d, function(x, y, r, visibility) {
+                Main.map.shadow[x][y] = s;
+            });
+        } else {
+            fov.compute(this.x, this.y, this.fv, function(x, y, r, visibility) {
+                Main.map.shadow[x][y] = s;
+            });
+        }
+    }
+}
+
+class Player extends Creature {
+
+    constructor(_x:number=0, _y:number=0, _ch:string="我", _color="#ff0") {
+        super(_x,_y,_ch,_color);
+    }
+
     act() {
         Main.engine.lock();
         document.addEventListener("keydown", this);
@@ -241,27 +357,32 @@ class Player extends Exit {
         keyMap[ROT.KEYS.VK_DOWN] = keyMap[ROT.KEYS.VK_S] = 4;        
         keyMap[ROT.KEYS.VK_LEFT] = keyMap[ROT.KEYS.VK_A] = 6;    
         if (!(code in keyMap)) { return; }
-
-        let dir = ROT.DIRS[8][keyMap[code]];
-        let dx = dir[0];
-        let dy = dir[1];
+        
+        let d = keyMap[code];        
+        let dx = ROT.DIRS[8][d][0];
+        let dy = ROT.DIRS[8][d][1];
         let x = this.x;
         let y = this.y;
 
         let xx = x + dx;
         let yy = y + dy;
 
-        if (!Main.map.isPassable(xx, yy)) { return; }
+        this.set_shadow(0.5);
+        this.d = d;
+    
+        if (Main.map.isPassable(xx, yy)) {                    
+            this.x = xx;
+            this.y = yy;
+        }
 
-        this.x = xx;
-        this.y = yy;        
-        document.removeEventListener("keydown", this);
-        Main.engine.unlock();
+        this.set_shadow();
         Main.map.draw();
+        document.removeEventListener("keydown", this);
+        Main.engine.unlock();         
     }
 }
 
-class Guard extends Player {
+class Guard extends Creature {
     constructor(_x:number=0, _y:number=0, _ch:string="衛", _color="#f00") {
         super(_x,_y,_ch,_color);
     }

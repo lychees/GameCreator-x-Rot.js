@@ -1,7 +1,3 @@
-
-let HEIGHT = 20;
-let WIDTH = 34;
-
 var Main = {
     display: null,
     map: null,
@@ -38,6 +34,11 @@ var Main = {
     },
 
     start_level: function(level) {
+
+        let ui1 = GameUI.get(1);
+        let w = ui1.width.text;
+        let h = ui1.height.text;
+
         this.clear_gcCanvas();        
         if (this.level == null) {
             this.init();
@@ -47,7 +48,7 @@ var Main = {
             this.init();
         }
         
-        this.map = new Map(WIDTH, HEIGHT);          
+        this.map = new Map(w, h);          
         this.level = level;
         this.map.gen(level);
         this.map.draw();

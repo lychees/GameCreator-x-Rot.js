@@ -1,29 +1,8 @@
 {
     "root": {
-        "children": [
-            {
-                "id": "42008224790_0.3782116668022131",
-                "condition": [],
-                "type": "UIBitmap",
-                "name": "pic",
-                "x": 0,
-                "y": 0,
-                "width": 224,
-                "height": 224,
-                "opacity": 1,
-                "rotation": 0,
-                "show": true,
-                "mouseEventEnabledData": true,
-                "isOpen": true,
-                "mouseEventEnabledInEditor": true,
-                "showOnEditor": true,
-                "hasCommand": [],
-                "image": "asset/image/picture/face/男主头像.png",
-                "grid9": "3,3,3,3,0",
-                "pivotType": 0
-            }
-        ]
+        "children": []
     },
+    "instanceClassName": "",
     "id": 3,
-    "instanceClassName": ""
+    "hasRootCommand": []
 }

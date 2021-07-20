@@ -14,6 +14,7 @@ var Map = (function () {
             this.shadow[x] = new Array(h);
             for (var y = 0; y < h; ++y) {
                 this.layer[x][y] = new Array();
+                this.shadow[x][y] = 1;
             }
         }
         this.agents = new Array();
@@ -49,13 +50,23 @@ var Map = (function () {
         }
         return true;
     };
+    Map.prototype.canLightPass = function (x, y) {
+        if (!this.inMap(x, y))
+            return false;
+        for (var _i = 0, _a = this.layer[x][y]; _i < _a.length; _i++) {
+            var t = _a[_i];
+            if (!t.lightpass)
+                return false;
+        }
+        return true;
+    };
     Map.prototype.draw_tile_at = function (x, y) {
         Main.display.draw(x, y, null);
         var a = this.layer[x][y];
         if (a !== null) {
             var n = a.length;
-            if (this.shadow[x][y] == true) {
-                a[n - 1].draw_with_shadow(0.5);
+            if (this.shadow[x][y] !== 0 && this.isFov) {
+                a[n - 1].draw_with_shadow(this.shadow[x][y]);
             }
             else {
                 a[n - 1].draw();
@@ -109,23 +120,69 @@ var Map = (function () {
         this.agents.push(player);
         this.player = player;
         Main.player = player;
+        player.set_shadow(0.5, 360);
+        player.set_shadow();
         var exit = this.createTileFromSpaces(Exit, spaces);
         this.layer[exit.x][exit.y].push(exit);
-        if (level >= 1) {
+        var ui1 = GameUI.get(1);
+        this.isFov = !ui1.isFov.selected;
+        var isBox = ui1.isBox.selected;
+        var isGuard = ui1.isGuard.selected;
+        if (isBox) {
             for (var i = 0; i < 3; i++) {
                 var box = this.createTileFromSpaces(Box, spaces);
                 box.hasKey = !i;
                 this.layer[box.x][box.y].push(box);
             }
             exit.needKey = true;
-            if (level >= 2) {
-                var guard = this.createTileFromSpaces(Guard, spaces);
-                this.agents.push(guard);
-            }
+        }
+        if (isGuard) {
+            var guard = this.createTileFromSpaces(Guard, spaces);
+            this.agents.push(guard);
         }
     };
     return Map;
 }());
+function colorHex(colorArr) {
+    var strHex = "#";
+    var colorArr;
+    for (var i = 0; i < colorArr.length; i++) {
+        var hex = Number(colorArr[i]).toString(16);
+        if (hex.length == "1") {
+            hex = "0" + hex;
+        }
+        strHex += hex;
+    }
+    return strHex;
+}
+function colorRgb(data) {
+    var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    var color = data.toLowerCase();
+    if (reg.test(color)) {
+        if (color.length === 4) {
+            var colorNew = "#";
+            for (var i = 1; i < 4; i += 1) {
+                colorNew += color.slice(i, i + 1).concat(color.slice(i, i + 1));
+            }
+            color = colorNew;
+        }
+        var colorChange = [];
+        for (var i = 1; i < 7; i += 2) {
+            colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
+        }
+        return colorChange;
+    }
+    else {
+        return color;
+    }
+}
+function mix(data, shadow) {
+    var c = colorRgb(data);
+    for (var i = 0; i < c.length; ++i) {
+        c[i] = Math.floor(c[i] * (1 - shadow));
+    }
+    return colorHex(c);
+}
 var Tile = (function () {
     function Tile(_x, _y, _ch, _color) {
         if (_x === void 0) { _x = 0; }
@@ -137,6 +194,7 @@ var Tile = (function () {
         this.ch = _ch;
         this.color = _color;
         this.passable = true;
+        this.lightpass = true;
     }
     Tile.prototype.enter = function () {
     };
@@ -144,6 +202,9 @@ var Tile = (function () {
     };
     Tile.prototype.draw = function () {
         Main.display.draw(this.x, this.y, this.ch, this.color);
+    };
+    Tile.prototype.draw_with_shadow = function (shadow) {
+        Main.display.draw(this.x, this.y, this.ch, mix(this.color, shadow));
     };
     return Tile;
 }());
@@ -156,6 +217,7 @@ var Wall = (function (_super) {
         if (_color === void 0) { _color = "#fff"; }
         _super.call(this, _x, _y, _ch, _color);
         this.passable = false;
+        this.lightpass = false;
     }
     return Wall;
 }(Tile));
@@ -205,6 +267,51 @@ var Box = (function (_super) {
     };
     return Box;
 }(Tile));
+var Creature = (function (_super) {
+    __extends(Creature, _super);
+    function Creature(_x, _y, _ch, _color) {
+        if (_x === void 0) { _x = 0; }
+        if (_y === void 0) { _y = 0; }
+        if (_ch === void 0) { _ch = "c"; }
+        if (_color === void 0) { _color = "#fff"; }
+        _super.call(this, _x, _y, _ch, _color);
+        this.d = 0;
+        this.fv = 6;
+        this.hp = 0;
+        this.HP = 0;
+        this.mp = 0;
+        this.MP = 0;
+        this.sp = 0;
+        this.SP = 0;
+        this.str = 0;
+        this.dex = 0;
+        this.con = 0;
+        this.int = 0;
+        this.wis = 0;
+        this.cha = 0;
+    }
+    Creature.prototype.getSpeed = function () {
+        return 100;
+    };
+    Creature.prototype.set_shadow = function (s, angle) {
+        if (s === void 0) { s = 0; }
+        if (angle === void 0) { angle = 90; }
+        var fov = new ROT.FOV.RecursiveShadowcasting(function (x, y) {
+            return Main.map.canLightPass(x, y);
+        });
+        if (angle == 90) {
+            fov.compute90(this.x, this.y, this.fv, this.d, function (x, y, r, visibility) {
+                Main.map.shadow[x][y] = s;
+            });
+        }
+        else {
+            fov.compute(this.x, this.y, this.fv, function (x, y, r, visibility) {
+                Main.map.shadow[x][y] = s;
+            });
+        }
+    };
+    return Creature;
+}(Tile));
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player(_x, _y, _ch, _color) {
@@ -214,9 +321,6 @@ var Player = (function (_super) {
         if (_color === void 0) { _color = "#ff0"; }
         _super.call(this, _x, _y, _ch, _color);
     }
-    Player.prototype.getSpeed = function () {
-        return 100;
-    };
     Player.prototype.act = function () {
         Main.engine.lock();
         document.addEventListener("keydown", this);
@@ -237,24 +341,26 @@ var Player = (function (_super) {
         if (!(code in keyMap)) {
             return;
         }
-        var dir = ROT.DIRS[8][keyMap[code]];
-        var dx = dir[0];
-        var dy = dir[1];
+        var d = keyMap[code];
+        var dx = ROT.DIRS[8][d][0];
+        var dy = ROT.DIRS[8][d][1];
         var x = this.x;
         var y = this.y;
         var xx = x + dx;
         var yy = y + dy;
-        if (!Main.map.isPassable(xx, yy)) {
-            return;
+        this.set_shadow(0.5);
+        this.d = d;
+        if (Main.map.isPassable(xx, yy)) {
+            this.x = xx;
+            this.y = yy;
         }
-        this.x = xx;
-        this.y = yy;
+        this.set_shadow();
+        Main.map.draw();
         document.removeEventListener("keydown", this);
         Main.engine.unlock();
-        Main.map.draw();
     };
     return Player;
-}(Exit));
+}(Creature));
 var Guard = (function (_super) {
     __extends(Guard, _super);
     function Guard(_x, _y, _ch, _color) {
@@ -287,5 +393,5 @@ var Guard = (function (_super) {
         }
     };
     return Guard;
-}(Player));
+}(Creature));
 //# sourceMappingURL=map.js.map
