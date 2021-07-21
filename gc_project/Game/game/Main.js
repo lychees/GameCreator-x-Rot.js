@@ -9,12 +9,7 @@ var Main = {
     back_to_title: function () {
         document.removeEventListener("keydown", Main.player);
         document.body.removeChild(this.display.getContainer());
-        var c = document.getElementById("gcCanvas");
-        c.height = 695;
-    },
-    clear_gcCanvas: function () {
-        var c = document.getElementById("gcCanvas");
-        c.height = 0;
+        GameUI.show(1);
     },
     init: function () {
         this.display = new ROT.Display({
@@ -24,13 +19,14 @@ var Main = {
             spacing: 1.08,
             fontFamily: 'Verdana'
         });
-        document.body.appendChild(this.display.getContainer());
+        document.body.insertBefore(this.display.getContainer(), document.getElementById('the3Container'));
+        document.getElementById("gcCanvas").style.position = "relative";
     },
     start_level: function (level) {
         var ui1 = GameUI.get(1);
         var w = ui1.width.text;
         var h = ui1.height.text;
-        this.clear_gcCanvas();
+        GameUI.hideAll();
         if (this.level == null) {
             this.init();
         }

@@ -10,15 +10,8 @@ var Main = {
     // 返回主菜单
     back_to_title: function() {
         document.removeEventListener("keydown", Main.player);        
-        document.body.removeChild(this.display.getContainer());
-        var c = document.getElementById("gcCanvas");        
-        c.height = 695;
-    }
-
-    // 清空 gcCanvas
-    clear_gcCanvas: function() {
-        let c = document.getElementById("gcCanvas");          
-        c.height = 0;
+        document.body.removeChild(this.display.getContainer());        
+        GameUI.show(1);
     }
     
     init: function() {
@@ -30,7 +23,8 @@ var Main = {
             fontFamily: 'Verdana' //Arial //'sans-serif',
         });
 
-        document.body.appendChild(this.display.getContainer());
+        document.body.insertBefore(this.display.getContainer(), document.getElementById('the3Container'));
+        document.getElementById("gcCanvas").style.position = "relative";       
     },
 
     start_level: function(level) {
@@ -39,7 +33,7 @@ var Main = {
         let w = ui1.width.text;
         let h = ui1.height.text;
 
-        this.clear_gcCanvas();        
+        GameUI.hideAll();      
         if (this.level == null) {
             this.init();
         } else {
