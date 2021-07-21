@@ -1,3 +1,4 @@
+
 namespace Roguelike {
     export class Map {
         
@@ -100,10 +101,11 @@ namespace Roguelike {
             return new tile(x, y);
         }
 
-        gen(level: number) {
+        gen() {
             let w = this.width;
             let h = this.height;        
             let digger;
+            let level = 1;
             if (level == 0) {
                 digger = new ROT.Map.EllerMaze(w, h);
             } else if (level == 1) {

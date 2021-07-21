@@ -89,10 +89,11 @@ var Roguelike;
             var y = parseInt(pos[1]);
             return new tile(x, y);
         };
-        Map.prototype.gen = function (level) {
+        Map.prototype.gen = function () {
             var w = this.width;
             var h = this.height;
             var digger;
+            var level = 1;
             if (level == 0) {
                 digger = new ROT.Map.EllerMaze(w, h);
             }

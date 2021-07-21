@@ -28,8 +28,8 @@
                 [
                     20,
                     "",
-                    "// 当前的事件触发器：trigger: CommandTrigger;\nMain.start_level(1);",
-                    "Main.start_level(1);\n",
+                    "// 当前的事件触发器：trigger: CommandTrigger;\nRoguelike.Main.start_level();",
+                    "Roguelike.Main.start_level();\n",
                     {
                         "___cmdID": "68811000747_0.19858532482201974"
                     }
